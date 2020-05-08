@@ -50,7 +50,7 @@ brew install git
 - Zoom
 - Cacher: Store code snippets
 
-```shell script
+```bash
 brew cask install \
   phpstorm \
   sublime-text \
