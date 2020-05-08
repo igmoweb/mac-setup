@@ -1,5 +1,6 @@
 Thanks to [Tania Rascia](https://www.taniarascia.com/setting-up-a-brand-new-mac-for-development/) for the inspiration.
-Here's the script: [script.sh](script.sh)
+
+Here's the complete script: [script.sh](script.sh)
 
 ## Homebrew
 
