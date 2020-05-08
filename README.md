@@ -32,7 +32,6 @@ brew install git
 - Alfred: Manage workflows and automation
 - Anki: Learn by repetition
 - Insomnia: Play with REST APIs
-- Bear: Take notes
 - Spotify
 - Google Backup and Sync: To sync files with Drive
 - Feedly: Read feeds
@@ -103,6 +102,8 @@ These apps must be installed manually. Either they are paid apps or they are not
 - Skitch: Easy screenshots [https://apps.apple.com/es/app/skitch/id425955336?mt=12](https://apps.apple.com/es/app/skitch/id425955336?mt=12)
 - Karabiner: Map your keyboard. [https://karabiner-elements.pqrs.org/](https://karabiner-elements.pqrs.org/)
 - SSH Proxy: [https://apps.apple.com/us/app/ssh-proxy/id597790822?mt=12](https://apps.apple.com/us/app/ssh-proxy/id597790822?mt=12)
+- Bear: Take notes [https://apps.apple.com/us/app/bear-beautiful-writing-app/id1091189122](https://apps.apple.com/us/app/bear-beautiful-writing-app/id1091189122)
+- Vagrant: [https://www.vagrantup.com/downloads.html](https://www.vagrantup.com/downloads.html)
 
 ### Chrome extensions
 
@@ -200,6 +201,99 @@ I use often a `ignacio.php` for tweaks in WordPress installs that I don't need t
 .idea
 ignacio.php
 ```
+
+## PHP and Composer install
+
+I normally work inside a Virtual Machine but I also have PHP installed locally so I can execute things with composer:
+
+Change the 7.2 if needed:
+```bash
+curl -s http://php-osx.liip.ch/install.sh | bash -s 7.2
+export PATH=/usr/local/php5/bin:$PATH  
+php -v 
+```
+
+Install Composer:
+```bash
+curl -sS https://getcomposer.org/installer | php
+sudo mv composer.phar /usr/local/bin/
+sudo chmod 755 /usr/local/bin/composer.phar
+```
+
+````bash
+cat <<EOT >> ~/.zshrc
+alias composer="php /usr/local/bin/composer.phar"
+EOT
+````
+
+You also may want to use `phpcs` to do some code reviews. I use it especially for security reviews. It's an automated way to spot security issues quickly:
+
+First, make `phpcs` available globally from your user `bin` folder. If the folder does not exist, you need to create it.
+
+```bash
+touch ~/bin/phpcs
+```
+
+Now create a binary to make the `phpcs` command available globally
+
+```bash
+cat <<EOT >> ~/bin/phpcs
+if (is_file(__DIR__.'/../autoload.php') === true) {
+    include_once __DIR__.'/../autoload.php';
+} else {
+    include_once 'PHP/CodeSniffer/autoload.php';
+}
+
+$runner   = new PHP_CodeSniffer\Runner();
+$exitCode = $runner->runPHPCS();
+exit($exitCode);
+EOT
+sudo chmod 755 ~/bin/phpcs 
+```
+
+Make sure that everything is fine `phpcs --help`
+
+In order to make my security code reviews, I create a set of rules in my home dir:
+
+```bash
+touch ~/phpcs-security.xml
+cat <<EOT >> ~/phpcs-security.xml
+<?xml version="1.0"?>
+<ruleset name="Security">
+    <description>Security reviews with PHPCS.</description>
+
+    <file>.</file>
+
+    <!-- Exclude the Composer Vendor directory. -->
+    <exclude-pattern>/vendor/*</exclude-pattern>
+
+    <!-- Exclude the Node Modules directory. -->
+    <exclude-pattern>/node_modules/*</exclude-pattern>
+
+    <!-- wpcs installed path -->
+    <config name="installed_paths" value="/Users/ignacio/.composer/vendor/wp-coding-standards/wpcs" />
+
+    <!-- PHPCS WP Aliases. Needed to execute WP Rules -->
+    <autoload>/Users/ignacio/.composer/vendor/wp-coding-standards/wpcs/WordPress/PHPCSAliases.php</autoload>
+
+    <!-- Just check php files -->
+    <arg name="extensions" value="php"/>
+
+    <!-- Colors! Nice! -->
+    <arg name="colors"/>
+    <arg value="s"/>
+
+    <!-- Set of rules we're going to use -->
+    <rule ref="WordPress.Security"/>
+    <rule ref="WordPress.DB.PreparedSQL"/>
+    <rule ref="WordPress.WP.GlobalVariablesOverride"/>
+    <rule ref="Squiz.PHP.Eval"/>
+    <rule ref="Squiz.PHP.Eval.Discouraged" />
+</ruleset>
+EOT
+```
+
+So now you can run `phpcs --standard=~/phpcs-security.xml .`
 
 
 
