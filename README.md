@@ -218,7 +218,7 @@ brew install yarn
 `touch ~/.gitconfig`
 
 ### Global .gitignore
-I use often a `ignacio.php` for tweaks in WordPress installs that I don't need to see in production. `.idea` is a folder that PhpStorm generates.
+I often use a `ignacio.php` for tweaks in WordPress installs that I don't need to see in production. `.idea` is a folder that PhpStorm generates.
 ```
 .idea
 ignacio.php
