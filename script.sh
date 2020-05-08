@@ -178,3 +178,18 @@ $exitCode = $runner->runPHPCS();
 exit($exitCode);
 EOT
 sudo chmod 755 ~/bin/phpcs
+
+# Create a script to backup Bear database
+cat <<EOT > ~bin/bear-backup
+#!/usr/bin/env bash
+
+rm -rf ~/Drive/Bear/db-backup
+cp -r ~/Library/Group\ Containers/9K33E3U3T4.net.shinyfrog.bear/Application\ Data ~/Drive/Bear/db-backup
+EOT
+sudo chmod 755 ~/bin/bear-backup
+
+# And add it to a cron job
+crontab -e
+
+# Add this line to your cron jobs list:
+0 11 * * * ~/bin/bear-backup

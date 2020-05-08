@@ -93,6 +93,28 @@ I use [Dark Purple](https://plugins.jetbrains.com/plugin/12100-dark-purple-theme
 
 I set a backup every day but do not back it up from 20:00 to 8:00
 
+### Bear backups
+
+I don't use the paid version of Bear so I create a cronjob to back it up every day at 11 am and place a copy inside Drive folder:
+
+First, create the script to create a backup:
+
+```bash
+cat <<EOT > ~bin/bear-backup
+#!/usr/bin/env bash
+
+rm -rf ~/Drive/Bear/db-backup
+cp -r ~/Library/Group\ Containers/9K33E3U3T4.net.shinyfrog.bear/Application\ Data ~/Drive/Bear/db-backup
+EOT
+sudo chmod 755 ~/bin/bear-backup
+```
+
+Add the script to your crontab by running `crontab -e` and then insert this line:
+
+`0 11 * * * ~/bin/bear-backup`
+
+Save and you should be done.
+
 ### Other Apps
 These apps must be installed manually. Either they are paid apps or they are not mirrored in Homebrew.
 
