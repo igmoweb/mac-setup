@@ -162,7 +162,6 @@ I have a few customizations in my .zshrc file:
 
 ### Shell aliases
 
-Edit your `.zshrc` and add the following line:
 ```bash
 cat <<EOT >> ~/.zshrc
 alias git='hub' # Only if you have installed hub. It adds more features to git command line
@@ -184,7 +183,7 @@ EOT
 
 ### Preventing rm doom
 
-In order to prevent something like `rm -rf` by mistake, I use a function that overrides it. Edit your .zshrc and add the following lines:
+In order to prevent something like `rm -rf` by mistake, I use a function that overrides it. 
 
 ```bash
 cat <<EOT >> ~/.zshrc
@@ -219,6 +218,9 @@ I also add a Oh My Zsh plugin for a better npm completion:
 
 ```bash
 git clone https://github.com/lukechilds/zsh-better-npm-completion ~/.oh-my-zsh/custom/plugins/zsh-better-npm-completion
+cat <<EOT >> ~/.zshrc
+plugins+=(zsh-better-npm-completion)
+EOT
 ```
 
 ## Cacher and Alfred integration
