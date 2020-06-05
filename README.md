@@ -44,6 +44,7 @@ brew install git
 - Pocket: Save stuff to read later but actually never read it
 - RAR: Sometimes you find RARs
 - Skype
+- ScreenFlow: Edit screencasts.
 - TimeMachineEditor: Allows to edit Time Machine frequency
 - VirtualBox
 - Zoom
@@ -78,6 +79,7 @@ brew cask install \
   skype \
   timemachineeditor \
   zoomus \
+  screenflow \  
   cacher
 ```
 
