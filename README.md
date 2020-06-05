@@ -49,7 +49,6 @@ brew install git
 - VirtualBox
 - Zoom
 - Cacher: Store code snippets
-- Bear: A markdown notebook app
 
 ```bash
 brew cask install \
@@ -81,8 +80,7 @@ brew cask install \
   timemachineeditor \
   zoomus \
   screenflow \  
-  cacher \
-  bear
+  cacher
 ```
 
 ### Alfred
