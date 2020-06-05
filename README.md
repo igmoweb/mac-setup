@@ -160,13 +160,8 @@ I have a few customizations in my .zshrc file:
 
 Edit your `.zshrc` and add the following line:
 ```bash
+cat <<EOT >> ~/.zshrc
 alias laxo='ls -laxo'
-```
-
-### GitHub aliases (If hub has been previously installed)
-
-Edit your `.zshrc` and add the following lines:
-```bash
 alias pulls='git browse -- pulls' # Opens the current repo PRs list URL.
 alias repo='git browse' # Opens the current repo URL.
 alias mypulls='git browse -- pulls/igmoweb' # Opens the current repo PRs list URL authored by me.
@@ -178,6 +173,8 @@ alias gnpr='git pull-request' # Create a new PR from the current branch to the d
 function issue() {
 	git browse -- issues/$1
 }
+
+EOR
 ```
 
 ### Preventing rm doom
@@ -185,6 +182,7 @@ function issue() {
 In order to prevent something like `rm -rf` by mistake, I use a function that overrides it. Edit your .zshrc and add the following lines:
 
 ```bash
+cat <<EOT >> ~/.zshrc
 function rm() {
   local path
   for path in "$@"; do
@@ -200,6 +198,7 @@ function rm() {
     fi
   done
 }
+EOR
 ```
 
 Reopen your terminal and whenever you try to run `rm -rf`, the deleted content will be sent to trash instead of to the forgotten realm.
