@@ -165,6 +165,7 @@ I have a few customizations in my .zshrc file:
 Edit your `.zshrc` and add the following line:
 ```bash
 cat <<EOT >> ~/.zshrc
+alias git='hub' # Only if you have installed hub. It adds more features to git command line
 alias laxo='ls -laxo'
 alias pulls='git browse -- pulls' # Opens the current repo PRs list URL.
 alias repo='git browse' # Opens the current repo URL.
