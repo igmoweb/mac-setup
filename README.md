@@ -150,9 +150,13 @@ These apps must be installed manually. Either they are paid apps or they are not
 [Oh My Zsh](https://ohmyz.sh/) to improve your terminal.
 `sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"`
 
-I use [powerlevel10k Theme](https://github.com/romkatv/powerlevel10k)
+I use [powerlevel10k Theme](https://github.com/romkatv/powerlevel10k). In order to install it:
 
-`git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k`
+```bash
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k
+```
+
+And set `ZSH_THEME="powerlevel10k/powerlevel10k"` in your `~/.zshrc` file.
 
 I have a few customizations in my .zshrc file:
 
@@ -208,6 +212,12 @@ Reopen your terminal and whenever you try to run `rm -rf`, the deleted content w
 ```bash
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
 brew install yarn
+```
+
+I also add a Oh My Zsh plugin for a better npm completion:
+
+```bash
+git clone https://github.com/lukechilds/zsh-better-npm-completion ~/.oh-my-zsh/custom/plugins/zsh-better-npm-completion
 ```
 
 ## Cacher and Alfred integration
