@@ -178,7 +178,7 @@ function issue() {
 	git browse -- issues/$1
 }
 
-EOR
+EOT
 ```
 
 ### Preventing rm doom
@@ -202,7 +202,7 @@ function rm() {
     fi
   done
 }
-EOR
+EOT
 ```
 
 Reopen your terminal and whenever you try to run `rm -rf`, the deleted content will be sent to trash instead of to the forgotten realm.
