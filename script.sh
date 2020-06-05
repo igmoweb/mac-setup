@@ -18,7 +18,7 @@ brew cask install \
   docker \
   vlc \
   1password \
-  lastpass \
+  lastpass \ 
   alfred \
   anki \
   insomnia \
@@ -36,6 +36,7 @@ brew cask install \
   skype \
   timemachineeditor \
   zoomus \
+  screenflow \  
   cacher
 
 # Action needed: change Alfred sync folder to Drive
@@ -56,19 +57,22 @@ sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.
 source ~/.zshrc
 
 # Oh My Zsh theme
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k
 # Action needed: Open your ~/.zshrc and change the theme to powerlevel10k/powerlevel10k
 # Action needed: Close and open your terminal to see the new theme
 
 # aliases and functions
 cat <<EOT >> ~/.zshrc
+alias git='hub' # Only if you have installed hub. It adds more features to git command line
 alias laxo='ls -laxo'
-alias pulls='git browse -- pulls'
-alias repo='git browse'
-alias mypulls='git browse -- pulls/igmoweb'
-alias wiki='git browse -- wiki'
-alias gprl='git pr list --format="%sC%>(8)%i%Creset %U %n         %t%  l%n%n"'
-alias gnpr='git pull-request'
+alias pulls='git browse -- pulls' # Opens the current repo PRs list URL.
+alias repo='git browse' # Opens the current repo URL.
+alias mypulls='git browse -- pulls/igmoweb' # Opens the current repo PRs list URL authored by me.
+alias wiki='git browse -- wiki' # Opens the current repo Wiki URL.
+alias gprl='git pr list --format="%sC%>(8)%i%Creset %U %n         %t%  l%n%n"' # Display a list of the current opened PRs with colors.
+alias gnpr='git pull-request' # Create a new PR from the current branch to the default branch.
+
+# Navigates to a given issue ID. Run issue ID in your terminal.
 function issue() {
 	git browse -- issues/$1
 }
@@ -96,6 +100,10 @@ source ~/.zshrc
 # ========== nvm, node and yarn ==========
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
 brew install yarn
+git clone https://github.com/lukechilds/zsh-better-npm-completion ~/.oh-my-zsh/custom/plugins/zsh-better-npm-completion
+cat <<EOT >> ~/.zshrc
+plugins+=(zsh-better-npm-completion)
+EOT
 
 # ========== Cacher and Alfred integration ==========
 npm install --g alfred-cacher
@@ -177,8 +185,10 @@ $runner   = new PHP_CodeSniffer\Runner();
 $exitCode = $runner->runPHPCS();
 exit($exitCode);
 EOT
+
 sudo chmod 755 ~/bin/phpcs
 
+# ========== Bear backups ==========
 # Create a script to backup Bear database
 cat <<EOT > ~bin/bear-backup
 #!/usr/bin/env bash
