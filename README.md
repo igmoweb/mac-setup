@@ -80,7 +80,8 @@ brew cask install \
   timemachineeditor \
   zoomus \
   screenflow \  
-  cacher
+  cacher \
+  eddieantonio/eddieantonio/imgcat
 ```
 
 ### Alfred
@@ -225,6 +226,9 @@ EOT
 
 ## Cacher and Alfred integration
 `npm install --g alfred-cacher`
+
+## imgls
+`npm install -g imgls`
 
 ## Git config
 
