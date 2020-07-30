@@ -4,8 +4,9 @@
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew update
 
-# ========== Git ==========
+# ========== Git & svn ==========
 brew install git
+brew install svn
 
 # ========== Apps ==========
 brew cask install \
