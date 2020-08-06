@@ -335,5 +335,7 @@ EOT
 
 So now you can run `phpcs --standard=~/phpcs-security.xml .`
 
+## Fonts
 
+I used [`Roboto Mono for Powerline`](https://github.com/powerline/fonts/tree/master/RobotoMono) but I'm switching now to [`Jetbrains Mono`](https://www.jetbrains.com/lp/mono/#how-to-install).
 
