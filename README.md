@@ -25,20 +25,18 @@ brew install git
 - Atom
 - Chrome
 - Firefox
-- iTerm2
 - Docker
 - VLC Media Player
 - 1Password
 - Alfred: Manage workflows and automation
-- Anki: Learn by repetition
 - Insomnia: Play with REST APIs
 - Spotify
-- Google Backup and Sync: To sync files with Drive
+- Google Drive: To sync files with Drive
 - Feedly: Read feeds
-- Filezilla: Sometimes I need FTP
 - Oversight: Warns you when something is about to use the microphone or camera.
+- Cyberduck: Sometimes I need FTP
 - Kap: Record your screen and export to GIFs
-- Local by Flywheel: An extra dev environment
+- LocalWP: An extra dev environment
 - MAMP: An extra dev environment
 - OmniDiskSweeper: Free your HD space
 - Pocket: Save stuff to read later but actually never read it
@@ -48,7 +46,12 @@ brew install git
 - TimeMachineEditor: Allows to edit Time Machine frequency
 - VirtualBox
 - Zoom
-- Cacher: Store code snippets
+- Notion
+- Slack
+- GitHub CLI
+- Karabiner: Map your keyboard
+- Vagrant
+- Camo Studio: Use your phone as a webcam
 
 ```bash
 brew cask install \
@@ -96,43 +99,18 @@ I use [Dark Purple](https://plugins.jetbrains.com/plugin/12100-dark-purple-theme
 
 I set a backup every day but do not back it up from 20:00 to 8:00
 
-### Bear backups
-
-I don't use the paid version of Bear so I create a cronjob to back it up every day at 11 am and place a copy inside Drive folder:
-
-First, create the script to create a backup:
-
-```bash
-cat <<EOT > ~bin/bear-backup
-#!/usr/bin/env bash
-
-rm -rf ~/Drive/Bear/db-backup
-cp -r ~/Library/Group\ Containers/9K33E3U3T4.net.shinyfrog.bear/Application\ Data ~/Drive/Bear/db-backup
-EOT
-sudo chmod 755 ~/bin/bear-backup
-```
-
-Add the script to your crontab by running `crontab -e` and then insert this line:
-
-`0 11 * * * ~/bin/bear-backup`
-
-Save and you should be done.
-
 ### Other Apps
 These apps must be installed manually. Either they are paid apps or they are not mirrored in Homebrew.
 
 - magnet: A window resizer. [https://apps.apple.com/es/app/magnet/id441258766?mt=12](https://apps.apple.com/es/app/magnet/id441258766?mt=12)
-- caffeine: Keep your mac awake, even if you are not using it. [http://lightheadsw.com/caffeine/](http://lightheadsw.com/caffeine/)
-- hub: A GitHub helper in the command line. Install instructions: [https://github.com/github/hub](https://github.com/github/hub)
+- Amphetamine: Keep your mac awake, even if you are not using it. [https://apps.apple.com/es/app/amphetamine/id937984704?mt=12](http://lightheadsw.com/caffeine/)
 - Skitch: Easy screenshots [https://apps.apple.com/es/app/skitch/id425955336?mt=12](https://apps.apple.com/es/app/skitch/id425955336?mt=12)
-- Karabiner: Map your keyboard. [https://karabiner-elements.pqrs.org/](https://karabiner-elements.pqrs.org/)
 - SSH Proxy: [https://apps.apple.com/us/app/ssh-proxy/id597790822?mt=12](https://apps.apple.com/us/app/ssh-proxy/id597790822?mt=12)
 - Bear: Take notes [https://apps.apple.com/us/app/bear-beautiful-writing-app/id1091189122](https://apps.apple.com/us/app/bear-beautiful-writing-app/id1091189122)
-- Vagrant: [https://www.vagrantup.com/downloads.html](https://www.vagrantup.com/downloads.html)
+- The Clock: Useful to have different clocks from all over the world [https://apps.apple.com/es/app/the-clock/id488764545?mt=12](https://apps.apple.com/es/app/the-clock/id488764545?mt=12)
 
 ### Chrome extensions
 
-- Cacher: Allows to copy snippets from any site and save them into Cacher.
 - 1Password
 - Form Save and Restore: saves form data and then restores it when you want it. (For testing).
 - Grammarly for Chrome.
@@ -145,6 +123,7 @@ These apps must be installed manually. Either they are paid apps or they are not
 - Send to Kindle for Google Chrome.
 - Web Developer: I don't use it often but it has some features that I use from time to time.
 - ZenHub for GitHub: To  manage projects inside GitHub.
+- Notion: Save things into a Notion page
 
 ## Shell
 
@@ -224,9 +203,6 @@ plugins+=(zsh-better-npm-completion)
 EOT
 ```
 
-## Cacher and Alfred integration
-`npm install --g alfred-cacher`
-
 ## imgls
 `npm install -g imgls`
 
@@ -246,10 +222,9 @@ ignacio.php
 
 I normally work inside a Virtual Machine but I also have PHP installed locally so I can execute things with composer:
 
-Change the 7.2 if needed:
+Change the 7.4 if needed:
 ```bash
-curl -s http://php-osx.liip.ch/install.sh | bash -s 7.2
-export PATH=/usr/local/php5/bin:$PATH  
+brew install php@7.4
 php -v 
 ```
 
