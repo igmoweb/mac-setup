@@ -7,7 +7,7 @@ Here's the complete script: [script.sh](script.sh)
 Homebrew allows you to install apps from the command line.
 
 ### Install
-`/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
+`/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
 
 ### And update
 `brew update`
