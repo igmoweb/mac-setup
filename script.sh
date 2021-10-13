@@ -8,8 +8,11 @@ brew update
 brew install git
 brew install svn
 
+# ========== Install Rossetta for Apple M chips ===========
+sudo softwareupdate --install-rosetta
+
 # ========== Apps ==========
-brew install \
+brew install --cask \
   phpstorm \
   sublime-text \
   atom \
@@ -22,25 +25,24 @@ brew install \
   insomnia \
   spotify \
   google-drive \
-  feedly \
   oversight \
   cyberduck \
   kap \
   local \
   mamp \
   omnidisksweeper \
-  pocket \
   rar \
   skype \
   screenflow \
   timemachineeditor \
-  zoomus \
+  zoom \
   notion \
   slack \
-  gh \
   karabiner-elements \
+  obs \
   camo-studio
 
+brew install gh
 # Action needed: change Alfred sync folder to Drive
 # Action needed: phpStorm settings: https://github.com/igmoweb/storm-settings and theme https://plugins.jetbrains.com/plugin/12100-dark-purple-theme
 # Action needed: Time Machine Editor: set a backup every day but do not back it up from 20:00 to 8:00
@@ -52,13 +54,11 @@ brew install \
 # ========== Oh My Zsh ==========
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-# Reload .zshrc without closing the terminal.
-source ~/.zshrc
-
-# Oh My Zsh theme
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k
 # Action needed: Open your ~/.zshrc and change the theme to powerlevel10k/powerlevel10k
 # Action needed: Close and open your terminal to see the new theme
+
+# Reload .zshrc without closing the terminal.
+source ~/.zshrc
 
 # aliases and functions
 cat <<EOT >> ~/.zshrc
