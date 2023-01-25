@@ -7,15 +7,15 @@ brew update
 # ========== Git & svn ==========
 brew install git
 brew install svn
+brew install gh
 
 # ========== Install Rossetta for Apple M chips ===========
-sudo softwareupdate --install-rosetta
+#sudo softwareupdate --install-rosetta
 
 # ========== Apps ==========
 brew install --cask \
   phpstorm \
   sublime-text \
-  atom \
   google-chrome \
   firefox \
   docker \
@@ -25,22 +25,18 @@ brew install --cask \
   insomnia \
   spotify \
   google-drive \
-  oversight \
-  cyberduck \
   kap \
   local \
   mamp \
   omnidisksweeper \
   rar \
   skype \
-  screenflow \
-  timemachineeditor \
   zoom \
   notion \
   slack \
   karabiner-elements \
   obs \
-  camo-studio
+  teamviewer
 
 brew install gh
 # Action needed: change Alfred sync folder to Drive
@@ -63,12 +59,12 @@ source ~/.zshrc
 # aliases and functions
 cat <<EOT >> ~/.zshrc
 alias laxo='ls -laxo'
-alias pulls='git browse -- pulls' # Opens the current repo PRs list URL.
-alias repo='git browse' # Opens the current repo URL.
-alias mypulls='git browse -- pulls/igmoweb' # Opens the current repo PRs list URL authored by me.
-alias wiki='git browse -- wiki' # Opens the current repo Wiki URL.
-alias gprl='git pr list --format="%sC%>(8)%i%Creset %U %n         %t%  l%n%n"' # Display a list of the current opened PRs with colors.
-alias gnpr='git pull-request' # Create a new PR from the current branch to the default branch.
+alias pulls='gh pr list --web' # Opens the current repo PRs list URL.
+alias gprl='gh pr list' # Display a list of the current opened PRs with colors.
+alias issue='gh issue view -w' # Opens an issue URL.
+alias repo='gh repo view -w' # Opens the current repo URL.
+alias gnpr='gh pr create' # Create a new PR from the current branch to the default branch.
+alias composer="php ~/bin/composer.phar"
 
 function rm() {
   local path
@@ -108,73 +104,21 @@ EOT
 # ========== PHP config ==========
 #curl -s http://php-osx.liip.ch/install.sh | bash -s 7.2
 #export PATH=/usr/local/php5/bin:$PATH
-brew install php@7.4
-php -v
+#brew install php@7.4
+#php -v
 
 # Composer
-curl -sS https://getcomposer.org/installer | php
-sudo mv composer.phar /usr/local/bin/
-sudo chmod 755 /usr/local/bin/composer.phar
+#curl -sS https://getcomposer.org/installer | php
+#sudo mv composer.phar /usr/local/bin/
+#sudo chmod 755 /usr/local/bin/composer.phar
 
-cat <<EOT >> ~/.zshrc
-alias composer="php /usr/local/bin/composer.phar"
-EOT
+#cat <<EOT >> ~/.zshrc
+#alias composer="php /usr/local/bin/composer.phar"
+#EOT
 
-source ~/.zshrc
-composer -v
+#source ~/.zshrc
+#composer -v
 
 # And composer dependencies
-composer global require phpunit/phpunit squizlabs/php_codesniffer
+#composer global require phpunit/phpunit squizlabs/php_codesniffer
 
-# Create a security coding standards config file
-touch ~/phpcs-security.xml
-cat <<EOT >> ~/phpcs-security.xml
-<?xml version="1.0"?>
-<ruleset name="Security">
-    <description>Security reviews with PHPCS.</description>
-
-    <file>.</file>
-
-    <!-- Exclude the Composer Vendor directory. -->
-    <exclude-pattern>/vendor/*</exclude-pattern>
-
-    <!-- Exclude the Node Modules directory. -->
-    <exclude-pattern>/node_modules/*</exclude-pattern>
-
-    <!-- wpcs installed path -->
-    <config name="installed_paths" value="/Users/ignacio/.composer/vendor/wp-coding-standards/wpcs" />
-
-    <!-- PHPCS WP Aliases. Needed to execute WP Rules -->
-    <autoload>/Users/ignacio/.composer/vendor/wp-coding-standards/wpcs/WordPress/PHPCSAliases.php</autoload>
-
-    <!-- Just check php files -->
-    <arg name="extensions" value="php"/>
-
-    <!-- Colors! Nice! -->
-    <arg name="colors"/>
-    <arg value="s"/>
-
-    <!-- Set of rules we're going to use -->
-    <rule ref="WordPress.Security"/>
-    <rule ref="WordPress.DB.PreparedSQL"/>
-    <rule ref="WordPress.WP.GlobalVariablesOverride"/>
-    <rule ref="Squiz.PHP.Eval"/>
-    <rule ref="Squiz.PHP.Eval.Discouraged" />
-</ruleset>
-EOT
-
-# Create a binary to run phpcs globally
-touch ~/bin/phpcs
-cat <<EOT >> ~/bin/phpcs
-if (is_file(__DIR__.'/../autoload.php') === true) {
-    include_once __DIR__.'/../autoload.php';
-} else {
-    include_once 'PHP/CodeSniffer/autoload.php';
-}
-
-$runner   = new PHP_CodeSniffer\Runner();
-$exitCode = $runner->runPHPCS();
-exit($exitCode);
-EOT
-
-sudo chmod 755 ~/bin/phpcs
